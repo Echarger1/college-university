@@ -9,10 +9,16 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+@using (Html.BeginForm())
+{
+    <p>Search for: @Html.TextBox("searchString")
+    <input type="submit" value="Search" />
+    </p>
+}
 <table class="table">
     <tr>
         <th>
-            @Html.ActionLink("First Name", "Index", new { sortColumn="FirstName" })
+            @Html.ActionLink("First Name", "Index", new { sortColumn = "FirstName" })
             @Html.ActionLink("^", "Index", new { sortColumn = "FirstNameRev" })
         </th>
         <th>

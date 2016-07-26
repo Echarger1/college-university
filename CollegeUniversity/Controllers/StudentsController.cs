@@ -15,11 +15,19 @@ namespace CollegeUniversity.Controllers
         private CollegeUniversityContext db = new CollegeUniversityContext();
 
         // GET: Students
-        public ActionResult Index(string sortColumn)
+        public ActionResult Index(string sortColumn, string searchString)
         {
             var students = from item in db.Students
                            select item;
-            
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                students = from item in students
+                           where item.LastName.Contains(searchString) ||
+                                 item.FirstName.Contains(searchString)
+                           select item;
+            }
+
             switch (sortColumn)
             {
                 case "FirstName":
