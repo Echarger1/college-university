@@ -12,10 +12,12 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.FirstName)
+            @Html.ActionLink("First Name", "Index", new { sortColumn="FirstName" })
+            @Html.ActionLink("^", "Index", new { sortColumn = "FirstNameRev" })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.LastName)
+            @Html.ActionLink("Last Name", "Index", new { sortColumn="LastName" })
+            @Html.ActionLink("^", "Index", new { sortColumn="LastNameRev" })
         </th>
         <th></th>
     </tr>

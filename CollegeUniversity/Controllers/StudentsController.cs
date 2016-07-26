@@ -15,9 +15,37 @@ namespace CollegeUniversity.Controllers
         private CollegeUniversityContext db = new CollegeUniversityContext();
 
         // GET: Students
-        public ActionResult Index()
+        public ActionResult Index(string sortColumn)
         {
-            return View(db.Students.ToList());
+            var students = from item in db.Students
+                           select item;
+            
+            switch (sortColumn)
+            {
+                case "FirstName":
+                    students = from item in students
+                               orderby item.FirstName
+                               select item;
+                    break;
+                case "FirstNameRev":
+                    students = from item in students
+                               orderby item.FirstName descending
+                               select item;
+                    break;
+                case "LastNameRev":
+                    students = from item in students
+                               orderby item.LastName descending
+                               select item;
+                    break;
+                case "LastName":
+                default:
+                    students = from item in students
+                               orderby item.LastName
+                               select item;
+                    break;
+
+            }
+            return View(students);
         }
 
         // GET: Students/Details/5
